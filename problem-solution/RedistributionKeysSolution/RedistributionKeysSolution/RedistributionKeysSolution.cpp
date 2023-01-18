@@ -7,6 +7,7 @@
 #include<fstream>
 #include <sstream>
 
+#define FILE_NAME "data.csv"
 int DESIRED_PASSWORD_PER_KEYS = 0;
 int TOLARANCE_IN_PERCENTAGE = 0;
 int TOLARANCE_VALUE = 0;
@@ -174,7 +175,7 @@ std::vector<int> readDataFromCSVFile(std::string fileName)
 int main() {
     
     //std::vector<int> pass = readDataFromCSVFile("data.csv");
-    std::vector<int> passVec = readDataFromCSVFile("data.csv");//{ 257, 1226, 852, 3117, 0, 1006, 991, 217, 1154, 1180 };
+    std::vector<int> passVec = readDataFromCSVFile(FILE_NAME);//{ 257, 1226, 852, 3117, 0, 1006, 991, 217, 1154, 1180 };
     printInitialInfo(passVec);
     passVec = balanceVector(passVec);
     printVector(passVec);
