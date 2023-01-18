@@ -14,10 +14,10 @@ void printVector(std::vector<int> vec)
     }
     std::cout << "}\n";
 };
-int main() {
+
+std::vector<int> balanceVector(std::vector<int>& passVec)
+{
     int MaxPasswords = 1000;
-    std::vector<int> passVec = { 257, 1226, 852, 3117, 0, 1006, 991, 217, 1154, 1180 };
-    printVector(passVec);
     int keyindex = 0;
     for (int i = 0; i < passVec.size(); i++)
     {
@@ -78,6 +78,14 @@ int main() {
         }
         //printVector(passVec);
     }
+    return passVec;
+}
+
+int main() {
+    
+    std::vector<int> passVec = { 257, 1226, 852, 3117, 0, 1006, 991, 217, 1154, 1180 };
+    printVector(passVec);
+    passVec = balanceVector(passVec);
     printVector(passVec);
     return 0;
 }
