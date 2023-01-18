@@ -23,7 +23,15 @@ void printVector(std::vector<int>& vec)
     }
     std::cout << "\n";
 };
-
+int vectSum(std::vector<int>& vec)
+{
+    int Sum = 0;
+    for (auto ele : vec)
+    {
+        Sum += ele;
+    }
+    return Sum;
+}
 void printInitialInfo(std::vector<int>& vec)
 {
     //taking tolarance value from user
@@ -33,7 +41,8 @@ void printInitialInfo(std::vector<int>& vec)
 
     std::cout << "\n\n---------------------------------------------------------\n\n";
     printVector(vec);
-    std::cout << "Total Passwords: " << DESIRED_PASSWORD_PER_KEYS * vec.size() << "\n";
+    std::cout << "Total Passwords: " << vectSum(vec) << "\n";
+    std::cout << "Total Desired Passwords: " << DESIRED_PASSWORD_PER_KEYS * vec.size() << "\n";
     std::cout << "Total Keys: " << vec.size() << "\n";
     std::cout << "Desired Passowrd Per Key: " << DESIRED_PASSWORD_PER_KEYS << "\n";
     std::cout << "Tolarance: " << TOLARANCE_IN_PERCENTAGE << "%" << "\n";
@@ -49,15 +58,17 @@ std::vector<int> balanceVector(std::vector<int>& passVec)
     int keyindex = 0;
     for (int i = 0; i < passVec.size(); i++)
     {
-        int currentValue = passVec.at(i);
-        int keyIndexvalue = passVec.at(keyindex);
-        if (currentValue <= 1000)
+        if (keyindex >= passVec.size())
+        {
+            std::cout << "The Total Number of passwords are greater than allowed password so program cannot balance more keys!\n\n";
+            return passVec;
+        }
+        if (passVec.at(i) <= MaxPasswords)
         {
             if (passVec.at(keyindex) == MaxPasswords)
             {
                 keyindex++;
             }
-            //printVector(passVec);
             continue;
         }
         else
@@ -79,7 +90,7 @@ std::vector<int> balanceVector(std::vector<int>& passVec)
                     {
                         passVec.at(i) = passVec.at(i) - remaingdiff;
                         passVec.at(keyindex) = passVec.at(keyindex) + remaingdiff;
-                        std::cout << "\n\t" << numOfMoves << ". Move " << remaingdiff << " from key " << i << " to key " << keyindex << "\n";
+                        std::cout << "\n\t" << numOfMoves << ". Move " << remaingdiff << " from key " << i << " to key " << keyindex << "\n\n";
                         diff -= remaingdiff;
                         numOfMoves++;
                         //std::cout << "\ndiff: " << diff;
@@ -88,7 +99,11 @@ std::vector<int> balanceVector(std::vector<int>& passVec)
                     keyindex++;
                     if (i != keyindex)
                     {
-
+                        if (keyindex >= passVec.size())
+                        {
+                            std::cout << "The Total Number of passwords are greater than allowed password so program cannot balance more keys!\n\n";
+                            return passVec;
+                        }
                         remaingdiff = MaxPasswords - passVec.at(keyindex);
                     }
                     else
