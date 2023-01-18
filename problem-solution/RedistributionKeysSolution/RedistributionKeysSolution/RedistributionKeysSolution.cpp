@@ -38,6 +38,14 @@ void printInitialInfo(std::vector<int>& vec)
     //taking tolarance value from user
     std::cout << "Enter Tolarance(%): ";
     std::cin >> TOLARANCE_IN_PERCENTAGE;
+
+    if (TOLARANCE_IN_PERCENTAGE < 0 || TOLARANCE_IN_PERCENTAGE > 100)
+    {
+        std::cout << "\nYou have entered wrong value the correct value is (0-100).";
+        TOLARANCE_IN_PERCENTAGE = 0;
+        std::cout << "Using Tolarance default value: " << TOLARANCE_IN_PERCENTAGE;
+    }
+
     TOLARANCE_VALUE = (TOLARANCE_IN_PERCENTAGE * DESIRED_PASSWORD_PER_KEYS) / 100;
 
     std::cout << "\n\n---------------------------------------------------------\n\n";
